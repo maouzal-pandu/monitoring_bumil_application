@@ -49,7 +49,7 @@ class LoginView extends GetView<LoginController> {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.text.withOpacity(0.06),
+                          color: AppColors.text.withValues(alpha: 0.06),
                           blurRadius: 16,
                           offset: const Offset(0, 6),
                         ),
