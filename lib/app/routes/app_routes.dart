@@ -10,6 +10,9 @@ abstract class Routes {
   static const OTP = _Paths.OTP;
   static const FORGOT_PASS = _Paths.FORGOT_PASS;
   static const RESET_PASS = _Paths.RESET_PASS;
+  static const HOME = _Paths.HOME;
+  static const BUMIL_HOME = _Paths.BUMIL_HOME;
+  static const BUMIL_SET_KEHAMILAN = _Paths.BUMIL_SET_KEHAMILAN;
 }
 
 abstract class _Paths {
@@ -19,4 +22,7 @@ abstract class _Paths {
   static const OTP = '/otp';
   static const FORGOT_PASS = '/forgot-pass';
   static const RESET_PASS = '/reset-pass';
+  static const HOME = '/home';
+  static const BUMIL_HOME = '/bumil-home';
+  static const BUMIL_SET_KEHAMILAN = '/bumil-set-kehamilan';
 }
