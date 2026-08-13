@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:monitoring_bumil_application/app/core/theme/app_colors.dart';
+import 'package:monitoring_bumil_application/app/data/models/village_model.dart';
 import '../controllers/regist_controller.dart';
 
 class RegistView extends GetView<RegistController> {
@@ -15,6 +16,7 @@ class RegistView extends GetView<RegistController> {
         centerTitle: true,
         backgroundColor: AppColors.background,
         elevation: 0,
+        forceMaterialTransparency: true,
       ),
       body: SafeArea(
         child: Form(
@@ -162,14 +164,14 @@ class RegistView extends GetView<RegistController> {
 
                 _buildLabel('Desa/Kelurahan'),
                 Obx(
-                  () => DropdownButtonFormField<int>(
+                  () => DropdownButtonFormField<VillageModel>(
                     initialValue: controller.selectedVillageId.value,
                     decoration: _inputDecoration('Pilih desa'),
                     items: controller.villages
                         .map(
-                          (v) => DropdownMenuItem<int>(
-                            value: v.id,
-                            child: Text(v.nama),
+                          (v) => DropdownMenuItem<VillageModel>(
+                            value: v,
+                            child: Text(v.name),
                           ),
                         )
                         .toList(),

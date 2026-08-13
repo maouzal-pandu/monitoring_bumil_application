@@ -60,7 +60,7 @@ class LoginView extends GetView<LoginController> {
                       children: [
                         // Email
                         TextFormField(
-                          controller: controller.emailController,
+                          controller: controller.identifierController,
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: AppColors.text),
                           decoration: AppInputDecoration.form(

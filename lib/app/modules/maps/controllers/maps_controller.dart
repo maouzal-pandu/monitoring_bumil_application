@@ -119,10 +119,12 @@ class MapsController extends GetxController {
     Get.dialog(
       AlertDialog(
         title: const Text("Konfirmasi Lokasi"),
-        content: Text(
-          "Lat: ${pickedLocation.value.latitude.toStringAsFixed(6)}\n"
-          "Lng: ${pickedLocation.value.longitude.toStringAsFixed(6)}\n\n"
-          "Gunakan lokasi ini?",
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset("assets/images/Location pin.gif"),
+            Text("Apakah ibu sudah yakin jika titik lokasi sudah benar?"),
+          ],
         ),
         actions: [
           TextButton(onPressed: () => Get.back(), child: const Text("Batal")),
@@ -133,7 +135,7 @@ class MapsController extends GetxController {
                 result: pickedLocation.value,
               ); // kembali ke halaman sebelumnya
             },
-            child: const Text("Ya, Gunakan"),
+            child: const Text("Ya, Saya Yakin"),
           ),
         ],
       ),

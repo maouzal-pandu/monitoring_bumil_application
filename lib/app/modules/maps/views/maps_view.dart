@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:monitoring_bumil_application/app/modules/maps/controllers/maps_controller.dart';
 import 'package:monitoring_bumil_application/app/core/theme/app_colors.dart'; // sesuaikan path
 
@@ -104,17 +103,6 @@ class MapsView extends GetView<MapsController> {
                     ? null
                     : controller.useCurrentLocation,
                 loading: controller.isLoadingLocation.value,
-              ),
-            ),
-          ),
-
-          Positioned(
-            top: 50,
-            left: 0,
-            child: SafeArea(
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.text),
-                onPressed: () => Get.back(),
               ),
             ),
           ),
