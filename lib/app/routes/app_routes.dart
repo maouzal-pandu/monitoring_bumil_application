@@ -13,6 +13,7 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const BUMIL_HOME = _Paths.BUMIL_HOME;
   static const BUMIL_SET_KEHAMILAN = _Paths.BUMIL_SET_KEHAMILAN;
+  static const MAPS = _Paths.MAPS;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const HOME = '/home';
   static const BUMIL_HOME = '/bumil-home';
   static const BUMIL_SET_KEHAMILAN = '/bumil-set-kehamilan';
+  static const MAPS = '/maps';
 }

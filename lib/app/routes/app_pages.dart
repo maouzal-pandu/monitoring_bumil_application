@@ -8,6 +8,8 @@ import '../modules/forgot-pass/bindings/forgot_pass_binding.dart';
 import '../modules/forgot-pass/views/forgot_pass_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/maps/bindings/maps_binding.dart';
+import '../modules/maps/views/maps_view.dart';
 import '../modules/otp/bindings/otp_binding.dart';
 import '../modules/otp/views/otp_view.dart';
 import '../modules/regist/bindings/regist_binding.dart';
@@ -59,6 +61,11 @@ class AppPages {
       name: _Paths.BUMIL_SET_KEHAMILAN,
       page: () => const BumilSetKehamilanView(),
       binding: BumilSetKehamilanBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAPS,
+      page: () => const MapsView(),
+      binding: MapsBinding(),
     ),
   ];
 }
