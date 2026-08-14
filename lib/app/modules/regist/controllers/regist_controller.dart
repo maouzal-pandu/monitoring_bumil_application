@@ -103,18 +103,8 @@ class RegistController extends GetxController {
       );
     } catch (e) {
       SnackbarHelper.error(e.toString());
-      print(e.toString());
     } finally {
       isLoading.value = false;
-      print(
-        "${namaC.text}"
-        "${nikC.text}"
-        "${emailC.text}"
-        "${teleponC.text}"
-        "${passwordC.text}"
-        "${selectedVillageId.value!.id}"
-        "${tanggalLahir}",
-      );
     }
   }
 

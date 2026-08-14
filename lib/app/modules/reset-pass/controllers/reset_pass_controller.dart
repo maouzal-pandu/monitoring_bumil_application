@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitoring_bumil_application/app/core/widgets/snackbar_helper.dart';
+import 'package:monitoring_bumil_application/app/data/providers/auth_provider.dart';
 
 class ResetPassController extends GetxController {
   // true = alur lupa password (dari OTP, tanpa password lama)
@@ -18,7 +20,9 @@ class ResetPassController extends GetxController {
 
   final isLoading = false.obs;
 
-  String email = '';
+  String resetToken = '';
+
+  final _authProvider = AuthProvider();
 
   @override
   void onInit() {
@@ -27,8 +31,8 @@ class ResetPassController extends GetxController {
     // Get.toNamed(Routes.RESET_PASSWORD, arguments: {'isForgotPassword': true, 'email': email});
     // Get.toNamed(Routes.RESET_PASSWORD, arguments: {'isForgotPassword': false});
     if (Get.arguments != null) {
-      isForgotPassword.value = Get.arguments['isForgotPassword'] ?? false;
-      email = Get.arguments['email'] ?? '';
+      isForgotPassword.value = Get.arguments['is_forgot_password'] ?? false;
+      resetToken = Get.arguments['reset_token'] ?? '';
     }
   }
 
@@ -64,11 +68,18 @@ class ResetPassController extends GetxController {
       isLoading.value = true;
 
       if (isForgotPassword.value) {
-        // TODO: panggil endpoint FastAPI reset-password (via email/OTP), tanpa password lama
-        // await AuthService.resetPasswordForgot(
-        //   email: email,
-        //   newPassword: newPasswordController.text,
-        // );
+        final response = await _authProvider.resetPassword(
+          resetToken: resetToken,
+          newPassword: newPasswordController.text,
+        );
+
+        if (response.containsKey("detail")) {
+          SnackbarHelper.error(response["detail"]);
+          return;
+        }
+
+        SnackbarHelper.success(response["message"]);
+        Get.offAllNamed("/login");
       } else {
         // TODO: panggil endpoint FastAPI change-password, dengan validasi password lama
         // await AuthService.changePassword(

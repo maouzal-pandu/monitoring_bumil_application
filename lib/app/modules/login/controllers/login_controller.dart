@@ -12,12 +12,12 @@ class LoginController extends GetxController {
 
   final _authProvider = AuthProvider();
 
-  @override
-  void onClose() {
-    super.onClose();
-    identifierController.dispose();
-    passwordController.dispose();
-  }
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  //   identifierController.dispose();
+  //   passwordController.dispose();
+  // }
 
   void togglePasswordVisibility() {
     isPasswordHidden.value = !isPasswordHidden.value;

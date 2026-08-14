@@ -42,23 +42,22 @@ class OtpView extends GetView<OtpController> {
                 ),
               ),
               const SizedBox(height: 8),
-              Obx(
-                () => Text.rich(
-                  TextSpan(
-                    text: 'Kode verifikasi telah dikirim ke ',
-                    style: TextStyle(fontSize: 14, color: AppColors.subtext),
-                    children: [
-                      TextSpan(
-                        text: controller.email.value,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.text,
-                        ),
+              Text.rich(
+                TextSpan(
+                  text: 'Kode verifikasi telah dikirim ke ',
+                  style: TextStyle(fontSize: 14, color: AppColors.subtext),
+                  children: [
+                    TextSpan(
+                      text: controller.email,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.text,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+
               const SizedBox(height: 32),
 
               // 6 kotak OTP

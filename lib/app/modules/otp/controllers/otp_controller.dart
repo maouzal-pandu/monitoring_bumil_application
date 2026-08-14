@@ -2,26 +2,46 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitoring_bumil_application/app/core/widgets/snackbar_helper.dart';
+import 'package:monitoring_bumil_application/app/data/providers/auth_provider.dart';
 
 class OtpController extends GetxController {
-  final email = ''.obs;
   final isLoading = false.obs;
   final errorText = ''.obs;
   final secondsLeft = 60.obs;
 
+  bool isRegister = true;
+
+  late String email;
+
   final otpControllers = List.generate(6, (_) => TextEditingController());
   final focusNodes = List.generate(6, (_) => FocusNode());
+
+  final _authProvider = AuthProvider();
 
   Timer? _timer;
 
   @override
   void onInit() {
     super.onInit();
-    // Ambil email dari argument, misal Get.toNamed(Routes.OTP, arguments: {'email': email})
-    if (Get.arguments != null && Get.arguments['email'] != null) {
-      email.value = Get.arguments['email'];
-    }
+
     _startTimer();
+
+    final args = Get.arguments;
+    if (args["is_reset_password"] != null) isRegister = false;
+    email = args["email"];
+  }
+
+  @override
+  void onClose() {
+    _timer?.cancel();
+    for (var c in otpControllers) {
+      c.dispose();
+    }
+    for (var f in focusNodes) {
+      f.dispose();
+    }
+    super.onClose();
   }
 
   void _startTimer() {
@@ -61,17 +81,49 @@ class OtpController extends GetxController {
 
     try {
       isLoading.value = true;
-      // TODO: panggil endpoint FastAPI verify-otp kamu di sini
-      // await AuthService.verifyOtp(email.value, otpCode);
 
-      Get.snackbar(
-        'Berhasil',
-        'Verifikasi berhasil',
-        snackPosition: SnackPosition.BOTTOM,
+      if (isRegister) {
+        final response = await _authProvider.verifyRegistOtp(
+          email: email,
+          otp: otpCode,
+        );
+
+        if (response.containsKey("detail")) {
+          SnackbarHelper.error(response["detail"]);
+          for (var c in otpControllers) {
+            c.clear();
+          }
+          return;
+        }
+
+        SnackbarHelper.success(response["message"]);
+        Get.offAllNamed("/login");
+        return;
+      }
+
+      // Verify Reset Password OTP Section
+      final response = await _authProvider.verifyResetPasswordOtp(
+        email: email,
+        otp: otpCode,
       );
-      // Get.offNamed(Routes.RESET_PASSWORD, arguments: {'email': email.value});
+
+      if (response.containsKey("detail")) {
+        SnackbarHelper.error(response["detail"]);
+
+        for (var c in otpControllers) {
+          c.clear();
+        }
+      }
+
+      Get.offNamed(
+        "/reset-pass",
+        arguments: {
+          "reset_token": response["reset_token"],
+          "is_forgot_password": true,
+        },
+      );
     } catch (e) {
-      errorText.value = 'Kode OTP salah atau kadaluarsa';
+      errorText.value = e.toString();
       for (var c in otpControllers) {
         c.clear();
       }
@@ -83,14 +135,11 @@ class OtpController extends GetxController {
 
   Future<void> resendOtp() async {
     try {
-      // TODO: panggil endpoint FastAPI resend-otp kamu di sini
-      // await AuthService.resendOtp(email.value);
       _startTimer();
-      Get.snackbar(
-        'Terkirim',
-        'Kode OTP baru telah dikirim',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+
+      final response = await _authProvider.sendResetPasswordEmail(email: email);
+
+      SnackbarHelper.success(response["message"]);
     } catch (e) {
       Get.snackbar(
         'Gagal',
@@ -98,17 +147,5 @@ class OtpController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
-  }
-
-  @override
-  void onClose() {
-    _timer?.cancel();
-    for (var c in otpControllers) {
-      c.dispose();
-    }
-    for (var f in focusNodes) {
-      f.dispose();
-    }
-    super.onClose();
   }
 }

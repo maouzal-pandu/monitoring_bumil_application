@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitoring_bumil_application/app/core/widgets/snackbar_helper.dart';
+import 'package:monitoring_bumil_application/app/data/providers/auth_provider.dart';
 
 class ForgotPassController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final isLoading = false.obs;
+
+  final _authProvider = AuthProvider();
+
+  @override
+  void onClose() {
+    super.onClose();
+    emailController.dispose();
+  }
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) return 'Email wajib diisi';
@@ -16,31 +26,22 @@ class ForgotPassController extends GetxController {
   Future<void> sendResetLink() async {
     if (!formKey.currentState!.validate()) return;
 
+    isLoading.value = true;
     try {
-      isLoading.value = true;
-      // TODO: panggil endpoint FastAPI forgot-password kamu di sini
-      // await AuthService.forgotPassword(emailController.text.trim());
+      final response = await _authProvider.sendResetPasswordEmail(
+        email: emailController.text,
+      );
 
-      Get.snackbar(
-        'Berhasil',
-        'Link reset password telah dikirim ke email kamu',
-        snackPosition: SnackPosition.BOTTOM,
+      SnackbarHelper.success(response["message"]);
+
+      Get.toNamed(
+        "/otp",
+        arguments: {"is_reset_password": true, "email": emailController.text},
       );
-      Get.back();
     } catch (e) {
-      Get.snackbar(
-        'Gagal',
-        'Terjadi kesalahan, coba lagi nanti',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackbarHelper.error(e.toString());
     } finally {
       isLoading.value = false;
     }
-  }
-
-  @override
-  void onClose() {
-    emailController.dispose();
-    super.onClose();
   }
 }
