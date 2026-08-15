@@ -64,15 +64,22 @@ class LoginView extends GetView<LoginController> {
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(color: AppColors.text),
                           decoration: AppInputDecoration.form(
-                            label: "Email",
-                            icon: Icons.email_outlined,
+                            label: "Email / NIK / No. Handphone",
+                            icon: Icons.person,
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email tidak boleh kosong';
+                              return 'Field tidak boleh kosong';
                             }
-                            if (!GetUtils.isEmail(value)) {
-                              return 'Format email tidak valid';
+
+                            final isEmail = GetUtils.isEmail(value);
+                            final isPhoneNumber = GetUtils.isPhoneNumber(value);
+                            final isNIK =
+                                GetUtils.isNumericOnly(value) &&
+                                value.length == 16;
+
+                            if (!isEmail && !isPhoneNumber && !isNIK) {
+                              return 'Format tidak valid';
                             }
                             return null;
                           },
@@ -91,8 +98,8 @@ class LoginView extends GetView<LoginController> {
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   controller.isPasswordHidden.value
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
                                   color: AppColors.subtext,
                                 ),
                                 onPressed: controller.togglePasswordVisibility,
