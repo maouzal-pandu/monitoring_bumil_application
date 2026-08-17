@@ -72,14 +72,12 @@ class AuthProvider {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
 
       if (response.statusCode != 200) {
-        throw Exception(
-          data["detail"] ?? {"detail": "Kredensial atau password salah}"},
-        );
+        return {"detail": data["detail"]};
       }
 
       return data;
     } catch (e) {
-      throw Exception("Error login: $e");
+      throw Exception(e.toString().replaceAll("Exception: ", ""));
     }
   }
 
