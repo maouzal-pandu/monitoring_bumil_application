@@ -32,13 +32,19 @@ class LoginController extends GetxController {
     try {
       isLoading.value = true;
 
-      final response = await _authProvider.login(
-        identifier: identifierController.text,
-        password: passwordController.text,
-      );
+      final response = await _authProvider
+          .login(
+            identifier: identifierController.text,
+            password: passwordController.text,
+          )
+          .timeout(
+            Duration(seconds: 5),
+            onTimeout: () => {"detail": "Timeout"},
+          );
 
       if (response.containsKey("detail")) {
         SnackbarHelper.error(response["detail"]);
+        return;
       }
 
       _box.write("user", response["user"]);

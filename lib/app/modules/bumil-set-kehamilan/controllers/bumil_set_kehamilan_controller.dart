@@ -94,7 +94,6 @@ class BumilSetKehamilanController extends GetxController {
       Get.offNamed("/bumil-home");
     } catch (e) {
       SnackbarHelper.error(e.toString());
-      print(e.toString());
     } finally {
       isLoading.value = false;
     }
