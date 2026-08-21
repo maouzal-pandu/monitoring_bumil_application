@@ -14,6 +14,10 @@ abstract class Routes {
   static const BUMIL_HOME = _Paths.BUMIL_HOME;
   static const BUMIL_SET_KEHAMILAN = _Paths.BUMIL_SET_KEHAMILAN;
   static const MAPS = _Paths.MAPS;
+  static const BUMIL_SCHEDULE = _Paths.BUMIL_SCHEDULE;
+  static const BUMIL_HISTORY = _Paths.BUMIL_HISTORY;
+  static const BUMIL_ADD_ANC_SCHEDULE = _Paths.BUMIL_ADD_ANC_SCHEDULE;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -27,4 +31,8 @@ abstract class _Paths {
   static const BUMIL_HOME = '/bumil-home';
   static const BUMIL_SET_KEHAMILAN = '/bumil-set-kehamilan';
   static const MAPS = '/maps';
+  static const BUMIL_SCHEDULE = '/bumil-schedule';
+  static const BUMIL_HISTORY = '/bumil-history';
+  static const BUMIL_ADD_ANC_SCHEDULE = '/bumil-add-anc-schedule';
+  static const SETTINGS = '/settings';
 }
