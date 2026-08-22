@@ -101,9 +101,7 @@ class MapsController extends GetxController {
         return;
       }
 
-      final pos = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+      final pos = await Geolocator.getCurrentPosition();
       pickedLocation.value = LatLng(pos.latitude, pos.longitude);
       _syncTextFields();
       currentZoom.value = 17;

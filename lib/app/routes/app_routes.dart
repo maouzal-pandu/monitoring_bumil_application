@@ -18,6 +18,8 @@ abstract class Routes {
   static const BUMIL_HISTORY = _Paths.BUMIL_HISTORY;
   static const BUMIL_ADD_ANC_SCHEDULE = _Paths.BUMIL_ADD_ANC_SCHEDULE;
   static const SETTINGS = _Paths.SETTINGS;
+  static const BIDAN_HOME = _Paths.BIDAN_HOME;
+  static const ADMIN_HOME = _Paths.ADMIN_HOME;
 }
 
 abstract class _Paths {
@@ -35,4 +37,6 @@ abstract class _Paths {
   static const BUMIL_HISTORY = '/bumil-history';
   static const BUMIL_ADD_ANC_SCHEDULE = '/bumil-add-anc-schedule';
   static const SETTINGS = '/settings';
+  static const BIDAN_HOME = '/bidan-home';
+  static const ADMIN_HOME = '/admin-home';
 }

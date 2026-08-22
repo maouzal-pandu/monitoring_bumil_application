@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum StatusJadwalAnc { terjadwal, selesai, terlewat, dibatalkan }
 
 StatusJadwalAnc _statusFromString(String value) {
@@ -5,6 +7,21 @@ StatusJadwalAnc _statusFromString(String value) {
     (e) => e.name == value,
     orElse: () => StatusJadwalAnc.terjadwal,
   );
+}
+
+extension StatusJadwalAncX on StatusJadwalAnc {
+  IconData get icon {
+    switch (this) {
+      case StatusJadwalAnc.terjadwal:
+        return Icons.schedule;
+      case StatusJadwalAnc.selesai:
+        return Icons.check_circle;
+      case StatusJadwalAnc.terlewat:
+        return Icons.error;
+      case StatusJadwalAnc.dibatalkan:
+        return Icons.cancel;
+    }
+  }
 }
 
 class JadwalAnc {

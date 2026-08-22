@@ -8,6 +8,7 @@ import 'package:monitoring_bumil_application/app/modules/bumil-history/views/bum
 import 'package:monitoring_bumil_application/app/modules/bumil-schedule/views/bumil_schedule_view.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../controllers/bumil_home_controller.dart';
+import 'package:monitoring_bumil_application/app/core/widgets/settings_button.dart';
 
 class BumilHomeView extends GetView<BumilHomeController> {
   const BumilHomeView({super.key});
@@ -111,7 +112,9 @@ class BumilHome extends GetView<BumilHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Column(children: [_buildTodayReminder()])),
+      body: Center(
+        child: Column(children: [SettingsButton(), _buildTodayReminder()]),
+      ),
     );
   }
 
@@ -247,7 +250,7 @@ class BumilHome extends GetView<BumilHomeController> {
         trailing: Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: statusInfo.color.withOpacity(0.15),
+            color: statusInfo.color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(

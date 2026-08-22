@@ -20,4 +20,6 @@ class BumilHomeController extends GetxController {
     if (indexPage.value == index) return;
     indexPage.value = index;
   }
+
+  
 }

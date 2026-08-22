@@ -7,6 +7,8 @@ class AppColors {
   static const Color primary = Color(0xFF1E66F5); // Blue
   static const Color secondary = Color(0xFF7287FD); // Lavender
   static const Color accent = Color(0xFF04A5E5); // Sky
+  static const Color teal = Color(0xFF179299);
+  static const Color crust = Color(0xFFdce0e8);
 
   static const Color lightBlue = Color(
     0xFF8CAAEE,

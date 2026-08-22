@@ -8,13 +8,13 @@ class AncScheduleService {
   final RxList<JadwalAnc> schedule = <JadwalAnc>[].obs;
   final isLoading = false.obs;
 
-  bool _fetched = false;
+  bool fetched = false;
 
   Future<void> fetchSchedule({
     required int kehamilanId,
     bool force = false,
   }) async {
-    if (_fetched && !force) return; // udah ada datanya, skip fetch ulang
+    if (fetched && !force) return; // udah ada datanya, skip fetch ulang
 
     try {
       isLoading.value = true;
@@ -22,7 +22,7 @@ class AncScheduleService {
         kehamilanId: kehamilanId,
       );
       schedule.assignAll(response); // sesuaikan sama bentuk response-nya
-      _fetched = true;
+      fetched = true;
     } catch (e) {
       // handle error
     } finally {

@@ -1,23 +1,10 @@
 import 'package:get/get.dart';
 
 class AdminHomeController extends GetxController {
-  //TODO: Implement AdminHomeController
+  final indexPage = 0.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void changeIndexPage(int index) {
+    if (indexPage.value == index) return;
+    indexPage.value = index;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

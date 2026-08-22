@@ -80,13 +80,7 @@ class ResetPassController extends GetxController {
 
         SnackbarHelper.success(response["message"]);
         Get.offAllNamed("/login");
-      } else {
-        // TODO: panggil endpoint FastAPI change-password, dengan validasi password lama
-        // await AuthService.changePassword(
-        //   oldPassword: oldPasswordController.text,
-        //   newPassword: newPasswordController.text,
-        // );
-      }
+      } else {}
 
       Get.snackbar(
         'Berhasil',

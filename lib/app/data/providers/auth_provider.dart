@@ -1,12 +1,17 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+enum RoleUser { bumil, bidan, admin }
 
 class AuthProvider {
   final _baseUrl = const String.fromEnvironment(
     "API_BASE_URL",
     defaultValue: "http://localhost:8000",
   );
+
+  final Rx<RoleUser> role = RoleUser.bumil.obs;
 
   String get _url => "$_baseUrl/auth";
 
@@ -75,6 +80,7 @@ class AuthProvider {
         return {"detail": data["detail"]};
       }
 
+      role.value = parseRole(data["user"]["role"]);
       return data;
     } catch (e) {
       throw Exception(e.toString().replaceAll("Exception: ", ""));
@@ -187,6 +193,17 @@ class AuthProvider {
       return data;
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  RoleUser parseRole(String r) {
+    switch (r) {
+      case "bidan":
+        return RoleUser.bidan;
+      case "admin":
+        return RoleUser.admin;
+      default:
+        return RoleUser.bumil;
     }
   }
 }

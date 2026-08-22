@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/admin-home/bindings/admin_home_binding.dart';
+import '../modules/admin-home/views/admin_home_view.dart';
+import '../modules/bidan-home/bindings/bidan_home_binding.dart';
+import '../modules/bidan-home/views/bidan_home_view.dart';
 import '../modules/bumil-add-anc-schedule/bindings/bumil_add_anc_schedule_binding.dart';
 import '../modules/bumil-add-anc-schedule/views/bumil_add_anc_schedule_view.dart';
 import '../modules/bumil-history/bindings/bumil_history_binding.dart';
@@ -94,6 +98,16 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.BIDAN_HOME,
+      page: () => const BidanHomeView(),
+      binding: BidanHomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_HOME,
+      page: () => const AdminHomeView(),
+      binding: AdminHomeBinding(),
     ),
   ];
 }
